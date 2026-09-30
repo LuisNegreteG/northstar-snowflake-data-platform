@@ -1,0 +1,1 @@
+# northstar-snowflake-data-platform
