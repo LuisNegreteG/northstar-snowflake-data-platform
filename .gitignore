@@ -1,0 +1,16 @@
+# dbt generated artifacts
+target/
+logs/
+dbt_packages/
+
+# Python
+__pycache__/
+*.pyc
+
+# OS / editor files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.log

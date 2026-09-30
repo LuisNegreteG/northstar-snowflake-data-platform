@@ -1,0 +1,87 @@
+version: 2
+
+models:
+
+  - name: stg_customers
+    description: Standardized customer data sourced from the Silver layer.
+
+    columns:
+
+      - name: customer_id
+        tests:
+          - unique
+          - not_null
+
+      - name: customer_status
+        tests:
+          - accepted_values:
+              values: ['ACTIVE', 'INACTIVE']
+
+
+  - name: stg_products
+    description: Standardized product data sourced from the Silver layer.
+
+    columns:
+
+      - name: product_id
+        tests:
+          - unique
+          - not_null
+
+      - name: unit_price
+        tests:
+          - not_null
+
+
+  - name: stg_orders
+    description: Validated order data sourced from the Silver layer.
+
+    columns:
+
+      - name: order_id
+        tests:
+          - unique
+          - not_null
+
+      - name: customer_id
+        tests:
+          - relationships:
+              to: ref('stg_customers')
+              field: customer_id
+              config:
+                severity: warn
+
+      - name: product_id
+        tests:
+          - relationships:
+              to: ref('stg_products')
+              field: product_id
+
+      - name: order_status
+        tests:
+          - accepted_values:
+              values:
+                - COMPLETED
+                - PENDING
+                - CANCELLED
+
+
+  - name: stg_web_events
+    description: Relational representation of customer web events.
+
+    columns:
+
+      - name: event_id
+        tests:
+          - unique
+          - not_null
+
+      - name: event_type
+        tests:
+          - accepted_values:
+              values:
+                - product_view
+                - add_to_cart
+                - purchase
+                - search
+                - checkout_started

@@ -1,0 +1,24 @@
+northstar:
+  target: dev
+
+  outputs:
+
+    dev:
+      type: snowflake
+      account: 'not_needed'
+      user: 'not_needed'
+      role: ACCOUNTADMIN
+      database: NORTHSTAR_DB
+      schema: DBT_DEV
+      warehouse: NORTHSTAR_WH
+      threads: 8
+
+    prod:
+      type: snowflake
+      account: 'not_needed'
+      user: 'not_needed'
+      role: ACCOUNTADMIN
+      database: NORTHSTAR_DB
+      schema: GOLD
+      warehouse: NORTHSTAR_WH
+      threads: 8

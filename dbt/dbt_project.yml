@@ -1,0 +1,23 @@
+name: 'northstar'
+version: '1.0.0'
+config-version: 2
+
+profile: 'northstar'
+
+model-paths: ["models"]
+macro-paths: ["macros"]
+
+models:
+  northstar:
+
+    staging:
+      +materialized: view
+      +schema: DBT_TRANSFORM
+
+    intermediate:
+      +materialized: view
+      +schema: DBT_TRANSFORM
+
+    marts:
+      +materialized: table
+      +schema: GOLD

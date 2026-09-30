@@ -1,0 +1,27 @@
+version: 2
+
+sources:
+  - name: silver
+    description: >
+      Curated Silver layer of the NorthStar Commerce data platform.
+      These objects are maintained by Snowflake Dynamic Tables.
+
+    database: NORTHSTAR_DB
+    schema: SILVER
+
+    tables:
+      - name: customers
+        identifier: CUSTOMERS
+        description: Cleaned and standardized customer data.
+
+      - name: products
+        identifier: PRODUCTS
+        description: Cleaned and standardized product data.
+
+      - name: orders
+        identifier: ORDERS
+        description: Validated and enriched order data.
+
+      - name: web_events
+        identifier: WEB_EVENTS
+        description: Relational representation of raw JSON web events.
