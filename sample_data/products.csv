@@ -1,0 +1,9 @@
+product_id,product_name,category,unit_price,is_active
+2001,Wireless Keyboard,Accessories,79.99,True
+2002,Ergonomic Mouse,Accessories,49.99,True
+2003,27-inch Monitor,Monitors,329.99,True
+2004,USB-C Dock,Accessories,149.99,True
+2005,Laptop Stand,Office,69.99,True
+2006,Noise-Cancelling Headphones,Audio,249.99,True
+2007,Webcam Pro,Video,119.99,False
+2008,Mechanical Keyboard,Accessories,139.99,True

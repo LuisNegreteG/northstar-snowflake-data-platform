@@ -1,0 +1,11 @@
+customer_id,first_name,last_name,email,country,signup_date,customer_status
+1001,Ava,Martin,ava.martin@example.com,Canada,2026-01-12,ACTIVE
+1002,Noah,Wilson,noah.wilson@example.com,Canada,2026-01-18,ACTIVE
+1003,Mia,Chen,mia.chen@example.com,United States,2026-02-03,ACTIVE
+1004,Liam,Brown,liam.brown@example.com,Canada,2026-02-21,INACTIVE
+1005,Sofia,Garcia,sofia.garcia@example.com,Mexico,2026-03-04,ACTIVE
+1006,Ethan,Taylor,,Canada,2026-03-17,ACTIVE
+1007,Emma,Davis,emma.davis@example.com,United States,2026-04-02,active
+1008,Lucas,Lopez,lucas.lopez@example.com,Mexico,2026-04-22,ACTIVE
+1009,Olivia,Anderson,olivia.anderson@example.com,Canada,2026-05-11,ACTIVE
+1010,Mateo,Hernandez,mateo.hernandez@example.com,Canada,2026-05-29,ACTIVE

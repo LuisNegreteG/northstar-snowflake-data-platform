@@ -1,0 +1,15 @@
+{"event_id": "E001", "customer_id": 1001, "event_type": "product_view", "event_ts": "2026-06-01T13:02:10", "device": {"type": "mobile", "os": "iOS"}, "page": {"product_id": 2001}}
+{"event_id": "E002", "customer_id": 1001, "event_type": "add_to_cart", "event_ts": "2026-06-01T13:04:44", "device": {"type": "mobile", "os": "iOS"}, "page": {"product_id": 2001}}
+{"event_id": "E003", "customer_id": 1001, "event_type": "purchase", "event_ts": "2026-06-01T13:10:21", "device": {"type": "mobile", "os": "iOS"}, "order_id": 5001}
+{"event_id": "E004", "customer_id": 1002, "event_type": "product_view", "event_ts": "2026-06-01T14:20:02", "device": {"type": "desktop", "os": "Windows"}, "page": {"product_id": 2003}}
+{"event_id": "E005", "customer_id": 1002, "event_type": "purchase", "event_ts": "2026-06-01T14:32:12", "device": {"type": "desktop", "os": "Windows"}, "order_id": 5002}
+{"event_id": "E006", "customer_id": 1003, "event_type": "search", "event_ts": "2026-06-02T09:12:33", "device": {"type": "mobile", "os": "Android"}, "search": {"query": "ergonomic mouse"}}
+{"event_id": "E007", "customer_id": 1003, "event_type": "purchase", "event_ts": "2026-06-02T09:28:18", "device": {"type": "mobile", "os": "Android"}, "order_id": 5003}
+{"event_id": "E008", "customer_id": 1005, "event_type": "product_view", "event_ts": "2026-06-03T18:05:09", "device": {"type": "tablet", "os": "iPadOS"}, "page": {"product_id": 2006}}
+{"event_id": "E009", "customer_id": 1005, "event_type": "purchase", "event_ts": "2026-06-03T18:22:49", "device": {"type": "tablet", "os": "iPadOS"}, "order_id": 5005}
+{"event_id": "E010", "customer_id": 1007, "event_type": "product_view", "event_ts": "2026-06-05T11:42:00", "device": {"type": "desktop", "os": "macOS"}, "page": {"product_id": 2008}}
+{"event_id": "E011", "customer_id": 1008, "event_type": "search", "event_ts": "2026-06-06T10:01:03", "device": {"type": "mobile", "os": "Android"}, "search": {"query": "keyboard"}}
+{"event_id": "E012", "customer_id": 1008, "event_type": "purchase", "event_ts": "2026-06-06T10:11:56", "device": {"type": "mobile", "os": "Android"}, "order_id": 5008}
+{"event_id": "E013", "customer_id": 1009, "event_type": "checkout_started", "event_ts": "2026-06-07T16:04:15", "device": {"type": "desktop", "os": "Windows"}, "cart": {"items": 1, "value": 329.99}}
+{"event_id": "E014", "customer_id": 1010, "event_type": "product_view", "event_ts": "2026-06-08T12:18:51", "device": {"type": "mobile", "os": "iOS"}, "page": {"product_id": 2006}}
+{"event_id": "E015", "customer_id": 1010, "event_type": "purchase", "event_ts": "2026-06-08T12:26:27", "device": {"type": "mobile", "os": "iOS"}, "order_id": 5010}

@@ -1,0 +1,2 @@
+customer_id,first_name,last_name,email,country,signup_date,customer_status
+1011,Isabella,Moore,isabella.moore@example.com,Canada,2026-06-20,ACTIVE

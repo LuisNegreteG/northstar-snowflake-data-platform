@@ -1,0 +1,4 @@
+order_id,customer_id,product_id,order_date,quantity,unit_price,order_status
+5021,1011,2009,2026-06-20,1,159.99,COMPLETED
+5022,1002,2009,2026-06-21,2,159.99,COMPLETED
+5023,1011,2001,2026-06-22,1,79.99,PENDING

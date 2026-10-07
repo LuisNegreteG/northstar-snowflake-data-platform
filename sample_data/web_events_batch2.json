@@ -1,0 +1,4 @@
+{"event_id": "E016", "customer_id": 1011, "event_type": "product_view", "event_ts": "2026-06-20T10:02:14", "device": {"type": "mobile", "os": "iOS"}, "page": {"product_id": 2009}}
+{"event_id": "E017", "customer_id": 1011, "event_type": "add_to_cart", "event_ts": "2026-06-20T10:04:52", "device": {"type": "mobile", "os": "iOS"}, "page": {"product_id": 2009}}
+{"event_id": "E018", "customer_id": 1011, "event_type": "purchase", "event_ts": "2026-06-20T10:09:31", "device": {"type": "mobile", "os": "iOS"}, "order_id": 5021}
+{"event_id": "E019", "customer_id": 1002, "event_type": "purchase", "event_ts": "2026-06-21T15:18:08", "device": {"type": "desktop", "os": "Windows"}, "order_id": 5022}
