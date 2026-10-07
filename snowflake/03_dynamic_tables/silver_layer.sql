@@ -1,0 +1,148 @@
+-- ============================================================
+-- NorthStar Commerce
+-- Silver Layer - Snowflake Dynamic Tables
+-- ============================================================
+
+USE ROLE ACCOUNTADMIN;
+USE WAREHOUSE NORTHSTAR_WH;
+USE DATABASE NORTHSTAR_DB;
+
+-- ============================================================
+-- CUSTOMERS
+-- ============================================================
+
+CREATE OR REPLACE DYNAMIC TABLE NORTHSTAR_DB.SILVER.CUSTOMERS
+    TARGET_LAG = '5 minutes'
+    WAREHOUSE = NORTHSTAR_WH
+    REFRESH_MODE = INCREMENTAL
+    INITIALIZE = ON_CREATE
+AS
+SELECT
+    CUSTOMER_ID,
+    INITCAP(TRIM(FIRST_NAME)) AS FIRST_NAME,
+    INITCAP(TRIM(LAST_NAME)) AS LAST_NAME,
+    LOWER(NULLIF(TRIM(EMAIL), '')) AS EMAIL,
+    INITCAP(TRIM(COUNTRY)) AS COUNTRY,
+    SIGNUP_DATE,
+    UPPER(TRIM(CUSTOMER_STATUS)) AS CUSTOMER_STATUS,
+
+    CASE
+        WHEN NULLIF(TRIM(EMAIL), '') IS NULL THEN FALSE
+        ELSE TRUE
+    END AS IS_EMAIL_PRESENT,
+
+    SOURCE_FILE,
+    INGESTED_AT
+
+FROM NORTHSTAR_DB.RAW.RAW_CUSTOMERS;
+
+
+-- ============================================================
+-- PRODUCTS
+-- ============================================================
+
+CREATE OR REPLACE DYNAMIC TABLE NORTHSTAR_DB.SILVER.PRODUCTS
+    TARGET_LAG = '5 minutes'
+    WAREHOUSE = NORTHSTAR_WH
+    REFRESH_MODE = INCREMENTAL
+    INITIALIZE = ON_CREATE
+AS
+SELECT
+    PRODUCT_ID,
+    INITCAP(TRIM(PRODUCT_NAME)) AS PRODUCT_NAME,
+    INITCAP(TRIM(CATEGORY)) AS CATEGORY,
+    UNIT_PRICE,
+    IS_ACTIVE,
+    SOURCE_FILE,
+    INGESTED_AT
+
+FROM NORTHSTAR_DB.RAW.RAW_PRODUCTS;
+
+
+-- ============================================================
+-- ORDERS
+-- ============================================================
+
+CREATE OR REPLACE DYNAMIC TABLE NORTHSTAR_DB.SILVER.ORDERS
+    TARGET_LAG = '5 minutes'
+    WAREHOUSE = NORTHSTAR_WH
+    REFRESH_MODE = INCREMENTAL
+    INITIALIZE = ON_CREATE
+AS
+SELECT
+    o.ORDER_ID,
+    o.CUSTOMER_ID,
+    o.PRODUCT_ID,
+    o.ORDER_DATE,
+    o.QUANTITY,
+    o.UNIT_PRICE,
+
+    o.QUANTITY * o.UNIT_PRICE AS LINE_AMOUNT,
+
+    UPPER(TRIM(o.ORDER_STATUS)) AS ORDER_STATUS,
+
+    c.CUSTOMER_ID IS NOT NULL AS IS_CUSTOMER_VALID,
+    p.PRODUCT_ID IS NOT NULL AS IS_PRODUCT_VALID,
+    o.QUANTITY > 0 AS IS_QUANTITY_VALID,
+    o.UNIT_PRICE >= 0 AS IS_PRICE_VALID,
+
+    (
+        c.CUSTOMER_ID IS NOT NULL
+        AND p.PRODUCT_ID IS NOT NULL
+        AND o.QUANTITY > 0
+        AND o.UNIT_PRICE >= 0
+    ) AS IS_VALID_ORDER,
+
+    o.SOURCE_FILE,
+    o.INGESTED_AT
+
+FROM NORTHSTAR_DB.RAW.RAW_ORDERS o
+
+LEFT JOIN NORTHSTAR_DB.SILVER.CUSTOMERS c
+    ON o.CUSTOMER_ID = c.CUSTOMER_ID
+
+LEFT JOIN NORTHSTAR_DB.SILVER.PRODUCTS p
+    ON o.PRODUCT_ID = p.PRODUCT_ID;
+
+
+-- ============================================================
+-- WEB EVENTS
+-- JSON / VARIANT -> relational structure
+-- ============================================================
+
+CREATE OR REPLACE DYNAMIC TABLE NORTHSTAR_DB.SILVER.WEB_EVENTS
+    TARGET_LAG = '5 minutes'
+    WAREHOUSE = NORTHSTAR_WH
+    REFRESH_MODE = INCREMENTAL
+    INITIALIZE = ON_CREATE
+AS
+SELECT
+    w.EVENT_DATA:event_id::STRING AS EVENT_ID,
+    w.EVENT_DATA:customer_id::NUMBER AS CUSTOMER_ID,
+    LOWER(TRIM(w.EVENT_DATA:event_type::STRING)) AS EVENT_TYPE,
+    w.EVENT_DATA:event_ts::TIMESTAMP_NTZ AS EVENT_TS,
+
+    LOWER(TRIM(w.EVENT_DATA:device.type::STRING)) AS DEVICE_TYPE,
+    w.EVENT_DATA:device.os::STRING AS DEVICE_OS,
+
+    w.EVENT_DATA:page.product_id::NUMBER AS PRODUCT_ID,
+    w.EVENT_DATA:order_id::NUMBER AS ORDER_ID,
+    w.EVENT_DATA:search.query::STRING AS SEARCH_QUERY,
+    w.EVENT_DATA:cart.items::NUMBER AS CART_ITEMS,
+    w.EVENT_DATA:cart.value::NUMBER(10,2) AS CART_VALUE,
+
+    c.CUSTOMER_ID IS NOT NULL AS IS_CUSTOMER_VALID,
+
+    (
+        w.EVENT_DATA:event_id IS NOT NULL
+        AND w.EVENT_DATA:event_type IS NOT NULL
+        AND w.EVENT_DATA:event_ts IS NOT NULL
+    ) AS IS_EVENT_COMPLETE,
+
+    w.SOURCE_FILE,
+    w.INGESTED_AT
+
+FROM NORTHSTAR_DB.RAW.RAW_WEB_EVENTS w
+
+LEFT JOIN NORTHSTAR_DB.SILVER.CUSTOMERS c
+    ON w.EVENT_DATA:customer_id::NUMBER = c.CUSTOMER_ID;
