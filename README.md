@@ -297,6 +297,13 @@ northstar-snowflake-data-platform/
 │   │   └── marts/
 │   └── macros/
 │
+├── streamlit/
+│   └── northstar_dashboard/
+│       ├── streamlit_app.py
+│       ├── snowflake.yml
+│       ├── pyproject.toml
+│       └── .streamlit/
+│           └── config.toml
 └── docs/
     └── architecture/
         ├── architecture.md
@@ -487,18 +494,30 @@ Core data platform: **Complete**
 ✅ GitHub integration
 ✅ Reproducible sample data
 ✅ Architecture documentation
+✅ Streamlit analytics application
+✅ Streamlit deployment in Snowflake
+
+
+### Streamlit Analytics Application
+
+A Streamlit in Snowflake application provides the interactive consumption layer for the platform.
+
+The deployed application is:
+
+```text
+NORTHSTAR_DB.APPS.NORTHSTAR_COMMERCE
 ```
+The dashboard reads directly from certified GOLD analytics models and Data Quality results stored in CONTROL.
+It contains four analytical views:
+- Sales Overview — completed orders, units sold, gross revenue, average order value, revenue trends, and daily order activity
+- Customer 360 — customer revenue, transactional activity, and behavioral web-event metrics
+- Product Performance — product-level orders, units sold, revenue, and average order value
+- Data Quality Monitoring — latest metadata-driven DQ execution results, failed rules, severity, and affected rows
 
-### Next
-
-A Streamlit in Snowflake application will provide an interactive consumption layer for:
-
-- Sales KPIs
-- Revenue trends
-- Customer analytics
-- Product performance
-- Data Quality monitoring
-
+The application is deployed natively in Snowflake using:
+Query warehouse: NORTHSTAR_WH
+Compute pool: SYSTEM_COMPUTE_POOL_CPU
+Schema: NORTHSTAR_DB.APPS
 ---
 
 ## About This Project

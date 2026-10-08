@@ -387,9 +387,9 @@ The platform therefore demonstrates both:
 
 The GOLD models are designed to support downstream analytical applications.
 
-The final planned consumption layer is a Streamlit application in Snowflake.
+The final consumption layer is implemented as a Streamlit application in Snowflake.
 
-Planned capabilities include:
+The deployed dashboard provides:
 
 - Sales KPIs
 - Revenue trends
