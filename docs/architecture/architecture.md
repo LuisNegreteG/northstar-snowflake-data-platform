@@ -499,6 +499,15 @@ northstar-snowflake-data-platform/
 │   │   └── marts/
 │   └── macros/
 │
+├── streamlit/
+│   └── northstar_dashboard/
+│       ├── streamlit_app.py
+│       ├── snowflake.yml
+│       ├── pyproject.toml
+│       └── .streamlit/
+│           └── config.toml
+│
+│
 └── docs/
     └── architecture/
         ├── architecture.md

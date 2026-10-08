@@ -470,7 +470,7 @@ The platform therefore demonstrates both **data engineering** and **analytics en
 
 ## Current Status
 
-Core data platform: **Complete**
+Core data platform: **Complete ✅**
 
 ```text
 ✅ Environment provisioning
@@ -496,9 +496,11 @@ Core data platform: **Complete**
 ✅ Architecture documentation
 ✅ Streamlit analytics application
 ✅ Streamlit deployment in Snowflake
+```
 
+---
 
-### Streamlit Analytics Application
+## Streamlit Analytics Application
 
 A Streamlit in Snowflake application provides the interactive consumption layer for the platform.
 
@@ -507,17 +509,24 @@ The deployed application is:
 ```text
 NORTHSTAR_DB.APPS.NORTHSTAR_COMMERCE
 ```
-The dashboard reads directly from certified GOLD analytics models and Data Quality results stored in CONTROL.
+
+The dashboard reads directly from certified `GOLD` analytics models and Data Quality results stored in `CONTROL`.
+
 It contains four analytical views:
-- Sales Overview — completed orders, units sold, gross revenue, average order value, revenue trends, and daily order activity
-- Customer 360 — customer revenue, transactional activity, and behavioral web-event metrics
-- Product Performance — product-level orders, units sold, revenue, and average order value
-- Data Quality Monitoring — latest metadata-driven DQ execution results, failed rules, severity, and affected rows
+
+- **Sales Overview** — completed orders, units sold, gross revenue, average order value, revenue trends, and daily order activity
+- **Customer 360** — customer revenue, transactional activity, and behavioral web-event metrics
+- **Product Performance** — product-level orders, units sold, revenue, and average order value
+- **Data Quality Monitoring** — latest metadata-driven DQ execution results, failed rules, severity, and affected rows
 
 The application is deployed natively in Snowflake using:
+
+```text
 Query warehouse: NORTHSTAR_WH
 Compute pool: SYSTEM_COMPUTE_POOL_CPU
 Schema: NORTHSTAR_DB.APPS
+```
+
 ---
 
 ## About This Project
