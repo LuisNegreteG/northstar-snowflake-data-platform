@@ -1,0 +1,18 @@
+definition_version: 2
+entities:
+  streamlit_app:
+    type: streamlit
+    main_file: streamlit_app.py
+    title: NorthStar Commerce
+    query_warehouse: NORTHSTAR_WH
+    compute_pool: SYSTEM_COMPUTE_POOL_CPU
+    artifacts:
+      - pyproject.toml
+      - streamlit_app.py
+      - .streamlit/config.toml
+    identifier:
+      database: NORTHSTAR_DB
+      schema: APPS
+      name: NORTHSTAR_COMMERCE
+    run_mode: SpcsOnly
+    execute_as: OWNER
