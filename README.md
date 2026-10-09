@@ -1,4 +1,4 @@
-# NorthStar Commerce — End-to-End Snowflake Data Platform
+# NorthStar Commerce: End-to-End Snowflake Data Platform
 
 An end-to-end cloud data engineering portfolio project built with **Snowflake, dbt, Snowpark Python, Dynamic Tables, Streams, Tasks, and GitHub**.
 
